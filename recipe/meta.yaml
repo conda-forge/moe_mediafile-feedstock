@@ -6,21 +6,21 @@ package:
   version: {{ version }}
 
 source:
-  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/moe_mediafile-{{ version }}.tar.gz
+  url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/moe_mediafile-{{ version }}.tar.gz
   sha256: e66cf6e55b3f669f96e998c877848c7682f73a1f1a0b4b517804c11f4ed10f15
 
 build:
   noarch: python
   script: {{ PYTHON }} -m pip install . -vv
-  number: 0
+  number: 1
 
 requirements:
   host:
-    - python >=3.7
+    - python {{ python_min }}
     - pip
     - flit-core
   run:
-    - python >=3.7
+    - python >={{ python_min }}
     - six >=1.9
     - mutagen >=1.46
 
@@ -31,6 +31,7 @@ test:
     - pip check
   requires:
     - pip
+    - python {{ python_min }}
 
 about:
   home: https://pypi.org/project/moe_mediafile/
